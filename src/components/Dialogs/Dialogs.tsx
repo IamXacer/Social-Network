@@ -66,5 +66,4 @@ const dialogs =[
                  </div>
       </div>
   )
-
 }
