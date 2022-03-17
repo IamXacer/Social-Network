@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {state} from "./redux/state"
 import {DialogsType, MessageType,PostDataType} from "./redux/state"
+import {BrowserRouter} from "react-router-dom";
 /*import {dialogs, postData,message} from "./redux/state";*/
+
 
 
 /*
@@ -52,7 +54,9 @@ export type PostDataType = {
 
 ReactDOM.render(
     <React.StrictMode>
-        <App  Appstate={state}/>
+        <BrowserRouter>
+        <App appState={state}/>
+        </BrowserRouter>
 
     </React.StrictMode>,
     document.getElementById('root')

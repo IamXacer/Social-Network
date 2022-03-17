@@ -10,6 +10,7 @@ export type MesageType = {
 
 
 export const Message = (props:MesageType) => {
-    return <div className={classes.dialog}>{props.message}</div>
+    return <div className={classes.dialog}>{props.message}
+    </div>
 }
 

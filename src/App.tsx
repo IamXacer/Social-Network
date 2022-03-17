@@ -9,7 +9,16 @@ import {RouteComponentProps} from '@reach/router';
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
-import {DialogsType, MessageType, PostDataType} from './redux/state';
+/*import {DialogsType, MessageType, PostDataType} from "./redux/state";*/
+import {
+    dialogsPageType,
+    DialogsType,
+    MessageType,
+    PostDataType,
+    profilePageType,
+    state,
+    stateType
+} from './redux/state';
 /*import { DialogsType, MessageType,  PostDataType} from "./index";*/
 /*import {PostDataType} from "./index";*/
 
@@ -18,16 +27,35 @@ import {DialogsType, MessageType, PostDataType} from './redux/state';
     message: string
     likeCount:string
 }*/
-export  type AppType = {
-    postData:Array<PostDataType>
-    dialogs:Array<DialogsType>
-    message:Array<MessageType>
+/*export  type AppType = {
+    Appstate: {
+        postData:Array<PostDataType>
+        dialogs:Array<DialogsType>
+        message:Array<MessageType>
+    }
+   /!* Appstate:AppType*!/
+
+}*/
+/*export  type AppType = {
+    Appstate: {
+        postData:Array<PostDataType>
+        dialogs:Array<DialogsType>
+        message:Array<MessageType>
+
+    }
+    stateType: {
+    profilePage:profilePageType
+    dialogsPage:dialogsPageType
+}
+}*/
+export type AppType = {
+    appState: stateType
 }
 
-
 function App(props:AppType) {
+
     return (
-        <BrowserRouter>
+
             <div className="app-wrapper">
                 <Header />
 
@@ -35,9 +63,10 @@ function App(props:AppType) {
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile'
-                               element={<Profile postData={props.Appstate.postData}/>}/>
+                               element={<Profile postData={props.appState.profilePage.postData}/>}/>
                         <Route path='/dialogs'
-                               element={<PostDialogs dialogs={props.dialogs} message={props.message}/>}
+                               element={<PostDialogs dialogs={props.appState.dialogsPage.dialogs}
+                                                     message={props.appState.dialogsPage.message}/>}
                         />
                         <Route path='/music'
                         element={<Music/>}/>
@@ -48,7 +77,7 @@ function App(props:AppType) {
                     </Routes>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 

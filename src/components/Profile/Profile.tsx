@@ -2,7 +2,7 @@ import React from "react";
 import classes from './Profile.module.css'
 import {MyPosts} from "./My Posts/MyPost";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostDataType} from "../../redux/state";
+import {PostDataType, profilePageType} from "../../redux/state";
 /*import {PostDataType} from "../../index";*/
 /*import {PostDataType} from "../../index"*/
 
@@ -12,9 +12,10 @@ import {PostDataType} from "../../redux/state";
         likeCount:string
 }*/
 export type ProfileType= {
-    postData:Array<PostDataType>
+/*    state: profilePageType*/
+    postData: Array<PostDataType>
 }
-export const Profile = (props:ProfileType) => {
+export const Profile = (props: ProfileType) => {
 
 
    /*    const postData = [
