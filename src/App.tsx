@@ -11,6 +11,8 @@ import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
 /*import {DialogsType, MessageType, PostDataType} from "./redux/state";*/
 import {
+    addMesage,
+    addPost,
     dialogsPageType,
     DialogsType,
     MessageType,
@@ -50,6 +52,7 @@ import {
 }*/
 export type AppType = {
     appState: stateType
+    addPost:(addPost:string)=>void
 }
 
 function App(props:AppType) {
@@ -63,10 +66,12 @@ function App(props:AppType) {
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route path='/profile'
-                               element={<Profile postData={props.appState.profilePage.postData}/>}/>
+                               element={<Profile postData={props.appState.profilePage.postData}
+                                                 newPostText={props.appState.profilePage.newPostText}
+                                                 addPost={addPost}/>}/>
                         <Route path='/dialogs'
                                element={<PostDialogs dialogs={props.appState.dialogsPage.dialogs}
-                                                     message={props.appState.dialogsPage.message}/>}
+                                                     message={props.appState.dialogsPage.message}addMesage={addMesage}/>}
                         />
                         <Route path='/music'
                         element={<Music/>}/>

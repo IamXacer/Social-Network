@@ -3,7 +3,7 @@ import React from "react";
 
 export  type PostType = {
     message?:string,
-    likeCount:string,
+    likeCount:number,
     id:string,
 }
 

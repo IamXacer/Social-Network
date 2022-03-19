@@ -30,6 +30,8 @@ export type MesageType = {
 type PostDialogType={
     dialogs:Array<DialogsType>
     message:Array<MessageType>
+    addMesage:(addMesage:string)=>void
+
    /* dialogs:Array<DialogsType>
     message:Array<MessagesType>*/
 }
@@ -42,7 +44,17 @@ export const PostDialogs = (props:PostDialogType) => {
 
     const messageElemets = props.message.map(message=> <Message id={message.id}message={message.message}/>)
 
-  return (
+    let newpostElement = React.createRef<HTMLTextAreaElement>()/*as React.MutableRefObject<HTMLTextAreaElement>*/
+
+    const olClickAlert = () => {
+
+        if (newpostElement.current){
+        props.addMesage( newpostElement.current.value )
+            newpostElement.current.value = ''
+    }}
+
+
+    return (
       <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
           {dialogsElement}
@@ -52,6 +64,10 @@ export const PostDialogs = (props:PostDialogType) => {
 
         <div className={classes.messages}>
             {messageElemets}
+            <span><textarea ref={newpostElement} ></textarea></span>
+            <div>
+            <button className={classes.But} onClick={olClickAlert}>Add post</button>
+            </div>
        {/* <Message  id={mesages[0].id} message={mesages[0].message}/>
         <Message  id={mesages[1].id} message={mesages[1].message}/>     {messageElemets}
         <Message  id={mesages[2].id} message={mesages[2].message}/>*/}

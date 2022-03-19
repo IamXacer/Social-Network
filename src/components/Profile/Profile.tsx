@@ -2,7 +2,7 @@ import React from "react";
 import classes from './Profile.module.css'
 import {MyPosts} from "./My Posts/MyPost";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostDataType, profilePageType} from "../../redux/state";
+import {addPost, newPostTextType, PostDataType, profilePageType} from "../../redux/state";
 /*import {PostDataType} from "../../index";*/
 /*import {PostDataType} from "../../index"*/
 
@@ -14,6 +14,9 @@ import {PostDataType, profilePageType} from "../../redux/state";
 export type ProfileType= {
 /*    state: profilePageType*/
     postData: Array<PostDataType>
+    addPost:(addPost:string)=>void
+    newPostText:Array<newPostTextType>
+
 }
 export const Profile = (props: ProfileType) => {
 
@@ -27,7 +30,9 @@ export const Profile = (props: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.postData}
+                     newPostText={props.postData}
+                     addPost={props.addPost}/>
         </div>
     )
 }

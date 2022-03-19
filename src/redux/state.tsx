@@ -1,4 +1,5 @@
 import React from 'react';
+import {rerenderEntireTree} from "../render";
 
 /*export type PosDialogType = {
     dialogsType:Array<DialogsType>
@@ -17,7 +18,7 @@ export type MessageType = {
 export type PostDataType = {
     id: string
     message: string
-    likeCount:string
+    likeCount:number
 }
 /*export type stateType ={
         postData:Array<PostDataType>
@@ -26,6 +27,7 @@ export type PostDataType = {
 }*/
 export type profilePageType ={
     postData: Array<PostDataType>
+    newPostText:Array<newPostTextType>
 }
 export type dialogsPageType ={
     dialogs:Array<DialogsType>
@@ -34,17 +36,25 @@ export type dialogsPageType ={
 export type stateType= {
     profilePage:profilePageType
     dialogsPage:dialogsPageType
+
+}
+
+export type newPostTextType = {
+    message:string
 }
 /*export const postData = */
 
 
- export const state =  {
+ export const state:stateType =  {
      profilePage:{
          postData:[
-             {id: '1', message: "Hi, how are you", likeCount: '15'},
-             {id: '1', message: "It's my first post", likeCount: '35'},
-             {id: '1', message: "Hi Yo", likeCount: '25'},
-             {id: '1', message: "Yo, how are you", likeCount: '11'},
+             {id: '1', message: "Hi, how are you", likeCount: 15},
+             {id: '1', message: "It's my first post", likeCount: 35},
+             {id: '1', message: "Hi Yo", likeCount: 25},
+             {id: '1', message: "Yo, how are you", likeCount: 11},
+         ],
+         newPostText:[
+             {message: 'it-kamasutra'}
          ]
      },
      dialogsPage:{
@@ -63,3 +73,48 @@ export type stateType= {
          ],
      }
  }
+ export type addPost = {
+     id:string,
+     message:string,
+     likeCount:number,
+
+ }
+ export const addPost = (postMasseges:string) => {
+     let newPost:PostDataType = {
+         id:'5',
+         message: postMasseges,
+         likeCount:0
+     };
+   state.profilePage.postData.push(newPost)
+     rerenderEntireTree(state)
+ };
+
+export const addMesage = (postsMasseges:string) => {
+  let newMessage:MessageType = {
+      id: '4',
+      message:postsMasseges
+  }
+  state.dialogsPage.message.push(newMessage)
+    rerenderEntireTree(state)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
