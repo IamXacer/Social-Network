@@ -29,7 +29,7 @@ export type MesageType = {
 }*/
 type PostDialogType={
     dialogs:Array<DialogsType>
-    message:Array<MessageType>
+    messages:Array<MessageType>
     addMesage:(addMesage:string)=>void
 
    /* dialogs:Array<DialogsType>
@@ -40,9 +40,9 @@ type PostDialogType={
 export const PostDialogs = (props:PostDialogType) => {
 
 
-    let dialogsElement = props.dialogs.map (d=><DialogItems id={d.id} name={d.name}/>)
+    let dialogsElement = props.dialogs.map ((d)=><DialogItems id={d.id} name={d.name} key={d.id}/>)
 
-    const messageElemets = props.message.map(message=> <Message id={message.id}message={message.message}/>)
+    const messageElemets = props.messages.map((m)=> <Message id={m.id}message={m.message} key={m.id}/>)
 
     let newpostElement = React.createRef<HTMLTextAreaElement>()/*as React.MutableRefObject<HTMLTextAreaElement>*/
 
