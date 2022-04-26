@@ -80,6 +80,7 @@ const App: React.FC<AppType> = (props) => {
                            element={<PostDialogs dialogs={props.state.dialogsPage.dialogs}
                                                  messages={props.state.dialogsPage.message}
                                                  addMesage={props.addMesage}
+                                                 newMessagBody={props.state.dialogsPage.newMessagBody}
                                                                           />}
                     />
                     <Route path='/music'

@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import {Post} from "./Posts/Post";
 import classes from './MyPosts.module.css'
 import {ReactPropTypes} from "react";
-import {ActionTypes, PostDataType} from "../../../redux/state";
+import {ActionTypes, addPostActionCreator, PostDataType, updateNewPostText} from "../../../redux/state";
 import {log} from "util";
 
 export  type MyPostType = {
@@ -15,10 +15,8 @@ export  type MyPostType = {
     /*value:(message:string | number | undefined)=>void*/
 }
 
-export const addPostActionCreator = () => {
-  return{type:'ADD-POST'
-  } as const
-}
+
+
 
 export const MyPosts = (props: MyPostType) => {
     const posts = props.postData.map(postmasage =>
@@ -37,8 +35,9 @@ export const MyPosts = (props: MyPostType) => {
          let text = newpostElement.current?.value
          props.ChangeNewTextCallback(text)
      }*/
-    const NewPostChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type:"UPDATE-NEW-POST-TEXT",newText:e.currentTarget.value})
+
+    const NewPostChangeHandler = (newText:ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewPostText(newText))
     }
     return (
         <div className={classes.descriptionBlock}>
