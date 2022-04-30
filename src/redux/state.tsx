@@ -1,4 +1,7 @@
 import {ChangeEvent} from "react";
+import {addPostActionCreator, ProfileReducer, updateNewPostText} from "./profile-reducer";
+import {DialogsReducer, sendNewMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {SidebarReducer} from "./sidebar-reducer";
 
 export type DialogsType = {
     id: string
@@ -14,6 +17,7 @@ export type PostDataType = {
     message: string
     likeCount: number
 }
+export type sidebarPageType = {}
 
 export type profilePageType = {
     postData: Array<PostDataType>
@@ -28,15 +32,13 @@ export type dialogsPageType = {
 export type stateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
-
-
+    sidebarPage:sidebarPageType
 }
 
 export type addPost = {
     id: string,
     message: string,
     likeCount: number,
-
 }
 
 
@@ -52,26 +54,16 @@ export type StoreType = {
     /*  updateNewDialogTexts:(newTextDialog:string) =>void*/
 
 }
-export type AddPostActionType = {
-    type: 'ADD-POST',
-}
-export type UpdatePostActionType = {
-    type: 'UPDATE-NEW-POST-TEXT',
-    newText: string
-}
-export type updateNewMessageBodyACType = {
-    type: 'UPDATE-NEW-MESAGE-BODY'
-    body: string
-}
-export type sendNewMessageACType = {
-    type:'SEND-MESSAGE'
 
-}
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdatePostActionType =  ReturnType<typeof updateNewPostText>
+export type updateNewMessageBodyACType =  ReturnType<typeof updateNewMessageBodyAC>
+export type sendNewMessageACType =  ReturnType<typeof sendNewMessageAC>
 export type ActionTypes =
     AddPostActionType
     | UpdatePostActionType
     | updateNewMessageBodyACType
-|sendNewMessageACType
+    |sendNewMessageACType
 
 export const Store: StoreType = {
     _state: {
@@ -103,7 +95,8 @@ export const Store: StoreType = {
                 {id: '4', message: 'YO'},
             ],
             newMessagBody: '',
-        }
+        },
+        sidebarPage:{},
     },
     _callSubscriber() {
         console.log('State changed')
@@ -125,47 +118,19 @@ export const Store: StoreType = {
     getState() {
         return this._state
     },
+
+
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostDataType = {
-                id: '5',
-                message: this._state.profilePage.newPostText,
-                likeCount: 0
-            };
-            this._state.profilePage.postData.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESAGE-BODY') {
-            this._state.dialogsPage.newMessagBody = action.body
-            this._callSubscriber()
-        } else if (action.type === 'SEND-MESSAGE') {
-            let body = this._state.dialogsPage.newMessagBody
-            this._state.dialogsPage.newMessagBody = ''
-            this._state.dialogsPage.message.push({id: '6', message: body})
-            this._callSubscriber()
-        }
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage ,action)
+        this._state.sidebarPage = SidebarReducer(this._state.dialogsPage ,action)
+        this._callSubscriber()
+
     }
 }
-export const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-export const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>): UpdatePostActionType => {
-    return {type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value} as const
-}
 
-export const updateNewMessageBodyAC = (e: ChangeEvent<HTMLTextAreaElement>):updateNewMessageBodyACType => {
-    return {
-        type: 'UPDATE-NEW-MESAGE-BODY',body:  e.currentTarget.value
-    } as const
-}
-export const sendNewMessageAC = ():sendNewMessageACType => {
-    return {type: 'SEND-MESSAGE'} as const
-}
+
+
 
 
 

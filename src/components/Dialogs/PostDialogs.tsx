@@ -4,36 +4,11 @@ import {NavLink} from "react-router-dom";
 import { DialogItems } from "./DialgItem/DialogItem";
 import { Message } from "./Message/Message";
 import {
-    ActionTypes,
-    DialogsType,
-    MessageType,
     sendNewMessageAC,
     updateNewMessageBodyAC,
-    UpdatePostActionType
-} from "../../redux/state";
-/*import {dialogs, DialogsType, MessageType} from "../../index";*/
+} from "../../redux/dialogs-reducer";
+import {ActionTypes, DialogsType, MessageType} from "../../redux/state";
 
-
-
-/*export type MessagesType={
-    id:string
-    message:string
-}
-export type DialogsType={
-    id:string
-    name:string
-}
-export type DialogItemsType = {
-    id:string
-    name :string
-
-}
-export type MesageType = {
-    id:string
-    message:string
-/!*    message:Array<Message>*!/
-
-}*/
 type PostDialogType={
     dialogs:Array<DialogsType>
     messages:Array<MessageType>
@@ -41,8 +16,7 @@ type PostDialogType={
     newMessagBody:string
     dispatch: (action:ActionTypes) =>void
 
-   /* dialogs:Array<DialogsType>
-    message:Array<MessagesType>*/
+
 }
 
 
@@ -55,14 +29,14 @@ export const PostDialogs = (props:PostDialogType) => {
 
    /* let newpostElement = React.createRef<HTMLTextAreaElement>()*//*as React.MutableRefObject<HTMLTextAreaElement>*/
 let newMessageBody = props.newMessagBody
-    let onSendMessageClick = () =>{
+
+let onSendMessageClick = () =>{
     props.dispatch(sendNewMessageAC())
+}
+    let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+    let body = e.target.value
+props.dispatch(updateNewMessageBodyAC(body))
     }
-    let onNewMessageChange = (body:ChangeEvent<HTMLTextAreaElement>) =>{
-    props.dispatch(updateNewMessageBodyAC(body))
-    }
-
-
     return (
       <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>

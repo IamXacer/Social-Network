@@ -2,8 +2,10 @@ import React, {ChangeEvent} from "react";
 import {Post} from "./Posts/Post";
 import classes from './MyPosts.module.css'
 import {ReactPropTypes} from "react";
-import {ActionTypes, addPostActionCreator, PostDataType, updateNewPostText} from "../../../redux/state";
+/*import {ActionTypes,  PostDataType,  from "../../../redux/";*/
 import {log} from "util";
+import {addPostActionCreator, updateNewPostText} from "../../../redux/profile-reducer";
+import {ActionTypes, PostDataType} from "../../../redux/state";
 
 export  type MyPostType = {
     /*    addPost:(addPost:string)=>void*/

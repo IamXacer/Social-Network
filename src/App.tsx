@@ -52,12 +52,14 @@ import {
 }*/
 export type AppType = {
 
-    state:stateType
+    store:stateType
    /* addPost:(addPost:string)=>void*/
 /*    ChangeNewText:(newText:string)=>void*/
     addMesage:(postsMasseges:string)=>void
     dispatch: (action: ActionTypes) => void
-
+ /*   dialogs:Array<DialogsType>
+    messages:Array<MessageType>
+*/
 }
 
 const App: React.FC<AppType> = (props) => {
@@ -71,16 +73,17 @@ const App: React.FC<AppType> = (props) => {
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path='/profile'
-                           element={<Profile postData={props.state.profilePage.postData}
-                                             newPostText={props.state.profilePage.newPostText}
+                           element={<Profile postData={props.store.profilePage.postData}
+                                             newPostText={props.store.profilePage.newPostText}
                                       /*       ChangeNewText={props.ChangeNewText}*/
                                              dispatch={props.dispatch}
                                                         />}/>
                     <Route path='/dialogs'
-                           element={<PostDialogs dialogs={props.state.dialogsPage.dialogs}
-                                                 messages={props.state.dialogsPage.message}
+                           element={<PostDialogs dialogs={props.store.dialogsPage.dialogs}
+                                                 messages={props.store.dialogsPage.message}
                                                  addMesage={props.addMesage}
-                                                 newMessagBody={props.state.dialogsPage.newMessagBody}
+                                                 newMessagBody={props.store.dialogsPage.newMessagBody}
+                                                 dispatch={props.dispatch}
                                                                           />}
                     />
                     <Route path='/music'
