@@ -14,18 +14,23 @@ let initialState = {
 export const ProfileReducer =
     (state=initialState,action:ActionTypes) => {
     switch (action.type){
-        case 'ADD-POST' :
+        case 'ADD-POST' :{
              let newPost: PostDataType = {
                 id: '5',
                 message: state.newPostText,
                 likeCount: 0,
              };
-            state.postData.push(newPost)
-            state.newPostText = ''
-            return state
-        case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.newText
-            return state
+             let copyState = {...state}
+            copyState.postData = [...state.postData]
+            copyState.postData.push(newPost)
+            copyState.newPostText = ""
+            return copyState}
+
+        case 'UPDATE-NEW-POST-TEXT':{
+            let copyState = {...state}
+            copyState.newPostText = action.newText
+            return copyState
+        }
         default :return state
     }
 }
@@ -34,6 +39,6 @@ export const addPostActionCreator = () => {
         type: 'ADD-POST'
     } as const
 }
-export const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    return {type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value} as const
+export const updateNewPostTextAC = (newText:string) => {
+    return {type: "UPDATE-NEW-POST-TEXT", newText:newText } as const
 }

@@ -3,40 +3,41 @@ import classes from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 import { DialogItems } from "./DialgItem/DialogItem";
 import { Message } from "./Message/Message";
-import {
-    sendNewMessageAC,
-    updateNewMessageBodyAC,
-} from "../../redux/dialogs-reducer";
-import {ActionTypes, DialogsType, MessageType} from "../../redux/state";
+import { StoreType } from "../../redux/redux-store";
+import {ActionTypes, dialogsPageType, DialogsType, MessageType} from "../../redux/state";
 
 type PostDialogType={
-    dialogs:Array<DialogsType>
-    messages:Array<MessageType>
-    addMesage:(addMesage:string)=>void
-    newMessagBody:string
-    dispatch: (action:ActionTypes) =>void
-
+    sendMessage:()=>void
+    updateNewMessageBody:(body:any)=>void
+    dialogsPage: dialogsPageType
 
 }
 
 
 export const PostDialogs = (props:PostDialogType) => {
+    let states = props.dialogsPage
 
 
-    let dialogsElement = props.dialogs.map ((d)=><DialogItems id={d.id} name={d.name} key={d.id}/>)
 
-    const messageElemets = props.messages.map((m)=> <Message id={m.id}message={m.message} key={m.id}/>)
+    let dialogsElement = states.dialogs.map ((d)=><DialogItems id={d.id} name={d.name} key={d.id}/>)
+
+    const messageElemets = states.message.map((m)=> <Message id={m.id}message={m.message} key={m.id}/>)
 
    /* let newpostElement = React.createRef<HTMLTextAreaElement>()*//*as React.MutableRefObject<HTMLTextAreaElement>*/
-let newMessageBody = props.newMessagBody
+let newMessageBody = props.dialogsPage.newMessagBody
 
 let onSendMessageClick = () =>{
-    props.dispatch(sendNewMessageAC())
+    props.sendMessage()
 }
+
+
     let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) =>{
     let body = e.target.value
-props.dispatch(updateNewMessageBodyAC(body))
+        props.updateNewMessageBody(body)
+        /*props.dispatch(updateNewMessageBodyAC(body))*/
     }
+
+
     return (
       <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
@@ -54,10 +55,7 @@ props.dispatch(updateNewMessageBodyAC(body))
             <div>
             <button className={classes.But} onClick={onSendMessageClick}>Add post</button>
             </div>
-       {/* <Message  id={mesages[0].id} message={mesages[0].message}/>
-        <Message  id={mesages[1].id} message={mesages[1].message}/>     {messageElemets}
-        <Message  id={mesages[2].id} message={mesages[2].message}/>*/}
-                 </div>
+                   </div>
       </div>
   )
 }

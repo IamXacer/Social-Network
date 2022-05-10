@@ -1,5 +1,5 @@
 import {ChangeEvent} from "react";
-import {addPostActionCreator, ProfileReducer, updateNewPostText} from "./profile-reducer";
+import {addPostActionCreator, ProfileReducer, updateNewPostTextAC} from "./profile-reducer";
 import {DialogsReducer, sendNewMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 
@@ -56,7 +56,7 @@ export type StoreType = {
 }
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdatePostActionType =  ReturnType<typeof updateNewPostText>
+export type UpdatePostActionType =  ReturnType<typeof updateNewPostTextAC>
 export type updateNewMessageBodyACType =  ReturnType<typeof updateNewMessageBodyAC>
 export type sendNewMessageACType =  ReturnType<typeof sendNewMessageAC>
 export type ActionTypes =

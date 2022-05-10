@@ -4,19 +4,20 @@ import classes from './MyPosts.module.css'
 import {ReactPropTypes} from "react";
 /*import {ActionTypes,  PostDataType,  from "../../../redux/";*/
 import {log} from "util";
-import {addPostActionCreator, updateNewPostText} from "../../../redux/profile-reducer";
-import {ActionTypes, PostDataType} from "../../../redux/state";
+import {addPostActionCreator,  updateNewPostTextAC} from "../../../redux/profile-reducer";
+import {ActionTypes, PostDataType, stateType} from "../../../redux/state";
 
 export  type MyPostType = {
-    /*    addPost:(addPost:string)=>void*/
+        addPost:()=>void
     postData:Array<PostDataType>
     /* addPostCallback:(addPost:string)=>void*/
-    /*  ChangeNewTextCallback:(newText:string)=>void*/
+    updateNewPostText:(newText:any)=>void
     newPostText:string
+ /*   store:stateType*/
+ /*   addPost:()=>void*/
     dispatch: (action: ActionTypes) => void
     /*value:(message:string | number | undefined)=>void*/
 }
-
 
 
 
@@ -26,21 +27,21 @@ export const MyPosts = (props: MyPostType) => {
               likeCount={postmasage.likeCount}/>
     )
 
-    /*  let newpostElement = React.createRef<HTMLTextAreaElement>()*/
+      let newpostElement = React.createRef<HTMLTextAreaElement>()
     /*as React.MutableRefObject<HTMLTextAreaElement>*/
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
-    }
+    const onAddPost = () => {
+        props.addPost()
+           }
 
-    /* const onPostChange = () => {
+     const updateNewPostText:(newText:any)=>void = () => {
          let text = newpostElement.current?.value
-         props.ChangeNewTextCallback(text)
-     }*/
-
+         props.updateNewPostText(text)
+     }
+/*
     const NewPostChangeHandler = (newText:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPostText(newText))
-    }
+        props.dispatch(updateNewPostTextAC(newText))
+    }*/
     return (
         <div className={classes.descriptionBlock}>
             <h3> My posts </h3>
@@ -48,17 +49,17 @@ export const MyPosts = (props: MyPostType) => {
                 <div>
               <span>  <textarea
                   /*ref={newpostElement}*/
-                  onChange={NewPostChangeHandler}
+                  onChange={updateNewPostText}
                   value={props.newPostText}/></span>
                 </div>
                 <div>
-                    <button className={classes.But} onClick={addPost}>Add post</button>
+                    <button className={classes.But}
+                            onClick={onAddPost}>
+                        Add post</button>
                 </div>
             </div>
             <div className={classes.descriptionBlock}>
                 {posts}
-
-
             </div>
         </div>
     )
