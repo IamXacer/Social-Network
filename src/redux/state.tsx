@@ -2,6 +2,7 @@ import {ChangeEvent} from "react";
 import {addPostActionCreator, ProfileReducer, updateNewPostTextAC} from "./profile-reducer";
 import {DialogsReducer, sendNewMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
+import {followAC, setUsersAC, unfollowAC} from "./user-reducer";
 
 export type DialogsType = {
     id: string
@@ -59,11 +60,18 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostActionType =  ReturnType<typeof updateNewPostTextAC>
 export type updateNewMessageBodyACType =  ReturnType<typeof updateNewMessageBodyAC>
 export type sendNewMessageACType =  ReturnType<typeof sendNewMessageAC>
+export type followACType =  ReturnType<typeof followAC>
+export type unfollowACType =  ReturnType<typeof unfollowAC>
+export type setUserACType =  ReturnType<typeof setUsersAC>
+
 export type ActionTypes =
     AddPostActionType
     | UpdatePostActionType
     | updateNewMessageBodyACType
     |sendNewMessageACType
+|followACType
+|unfollowACType
+|setUserACType
 
 export const Store: StoreType = {
     _state: {
@@ -124,6 +132,7 @@ export const Store: StoreType = {
         this._state.profilePage = ProfileReducer(this._state.profilePage, action)
         this._state.dialogsPage = DialogsReducer(this._state.dialogsPage ,action)
         this._state.sidebarPage = SidebarReducer(this._state.dialogsPage ,action)
+
         this._callSubscriber()
 
     }

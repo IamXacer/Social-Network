@@ -1,14 +1,7 @@
-import React, {ChangeEvent} from "react";
-import classes from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import { DialogItems } from "./DialgItem/DialogItem";
-import { Message } from "./Message/Message";
-import {
-    sendNewMessageAC,
-    updateNewMessageBodyAC,
-} from "../../redux/dialogs-reducer";
-import {ActionTypes, dialogsPageType, DialogsType, MessageType} from "../../redux/state";
-import {AppRootStateType, store, StoreType} from "../../redux/redux-store";
+import React from "react";
+import {sendNewMessageAC, updateNewMessageBodyAC,} from "../../redux/dialogs-reducer";
+import {dialogsPageType} from "../../redux/state";
+import {AppRootStateType} from "../../redux/redux-store";
 import {PostDialogs} from "./PostDialogs";
 /*import {StoreContext} from "../../StoreContext";*/
 import {connect} from "react-redux";

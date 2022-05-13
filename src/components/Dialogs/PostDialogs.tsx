@@ -48,10 +48,10 @@ let onSendMessageClick = () =>{
 
             <div>{messageElemets}</div>
             <div></div>
-            <div></div>
+            <div>
 
             <span><textarea placeholder='Enter your message'
-            value={newMessageBody} onChange={onNewMessageChange}></textarea></span>
+            value={newMessageBody} onChange={onNewMessageChange}></textarea></span></div>
             <div>
             <button className={classes.But} onClick={onSendMessageClick}>Add post</button>
             </div>

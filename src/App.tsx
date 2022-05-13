@@ -3,16 +3,12 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {NavBar} from './components/Navbar/NavBar';
 import {Profile} from './components/Profile/Profile';
-import {PostDialogs} from "./components/Dialogs/PostDialogs";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {RouteComponentProps} from '@reach/router';
-import {Music} from "./components/Music/Music";
+import {Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
 /*import {DialogsType, MessageType, PostDataType} from "./redux/state";*/
-import {AppRootStateType, StoreType} from "./redux/redux-store";
-import { ActionTypes } from './redux/state';
-import { SuperPostDialigContainer } from './components/Dialogs/PostDialogsContainer';
+import {SuperPostDialigContainer} from './components/Dialogs/PostDialogsContainer';
+import {Users} from "./components/Users/Users";
 /*import {PostDialogsContainer} from "./components/Dialogs/PostDialogsContainer";*/
 /*import { DialogsType, MessageType,  PostDataType} from "./index";*/
 /*import {PostDataType} from "./index";*/
@@ -45,7 +41,7 @@ const App: React.FC<AppType> = (props) => {
                            element={<SuperPostDialigContainer   />}
                     />
                     <Route path='/music'
-                           element={<Music/>}/>
+                           element={<Users/>}/>
                     <Route path='/settings'
                            element={<Settings/>}/>
                     <Route path='/news'

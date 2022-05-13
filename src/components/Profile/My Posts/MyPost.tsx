@@ -34,8 +34,8 @@ export const MyPosts = (props: MyPostType) => {
         props.addPost()
            }
 
-     const updateNewPostText:(newText:any)=>void = () => {
-         let text = newpostElement.current?.value
+     const updateNewPostText =(e:ChangeEvent<HTMLTextAreaElement>)=> {
+         let text = e.target.value
          props.updateNewPostText(text)
      }
 /*

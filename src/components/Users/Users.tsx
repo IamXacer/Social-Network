@@ -1,8 +1,8 @@
 import React from "react";
 import classes from './Dialogs.module.css'
 
-export const Music = () => {
+export const Users = () => {
   return (
-      <div>Music</div>
+      <div>Users</div>
   )
 }
