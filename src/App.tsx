@@ -8,6 +8,7 @@ import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
 /*import {DialogsType, MessageType, PostDataType} from "./redux/state";*/
 import {SuperPostDialigContainer} from './components/Dialogs/PostDialogsContainer';
+import {UsersContainer} from "./components/Users/UsersContainer";
 import {Users} from "./components/Users/Users";
 /*import {PostDialogsContainer} from "./components/Dialogs/PostDialogsContainer";*/
 /*import { DialogsType, MessageType,  PostDataType} from "./index";*/
@@ -40,8 +41,8 @@ const App: React.FC<AppType> = (props) => {
                     <Route path='/dialogs'
                            element={<SuperPostDialigContainer   />}
                     />
-                    <Route path='/music'
-                           element={<Users/>}/>
+                    <Route path='/users'
+                           element={<UsersContainer/>}/>
                     <Route path='/settings'
                            element={<Settings/>}/>
                     <Route path='/news'
