@@ -15,7 +15,7 @@ import Provider from 'react-redux/es/components/Provider';
 
 
 /*export const rerenderEntireTree = () => {*/
-    debugger
+
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>

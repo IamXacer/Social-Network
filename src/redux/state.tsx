@@ -1,8 +1,16 @@
 import {ChangeEvent} from "react";
-import {addPostActionCreator, ProfileReducer, updateNewPostTextAC} from "./profile-reducer";
+import {addPostActionCreator, ProfileReducer, setUserProfileAC, updateNewPostTextAC} from "./profile-reducer";
 import {DialogsReducer, sendNewMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
-import {followAC, setUsersAC, unfollowAC} from "./user-reducer";
+import {
+    follow, followingInProgressAC,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    togleIsFetching,
+    unfollow
+} from "./user-reducer";
+import {setUserDataAC} from "./auth-reducer";
 
 export type DialogsType = {
     id: string
@@ -23,6 +31,7 @@ export type sidebarPageType = {}
 export type profilePageType = {
     postData: Array<PostDataType>
     newPostText: string
+    profile:null
 }
 export type dialogsPageType = {
     dialogs: Array<DialogsType>
@@ -60,9 +69,15 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostActionType =  ReturnType<typeof updateNewPostTextAC>
 export type updateNewMessageBodyACType =  ReturnType<typeof updateNewMessageBodyAC>
 export type sendNewMessageACType =  ReturnType<typeof sendNewMessageAC>
-export type followACType =  ReturnType<typeof followAC>
-export type unfollowACType =  ReturnType<typeof unfollowAC>
-export type setUserACType =  ReturnType<typeof setUsersAC>
+export type followACType =  ReturnType<typeof follow>
+export type unfollowACType =  ReturnType<typeof unfollow>
+export type setUserACType =  ReturnType<typeof setUsers>
+export type setCurrentPageACType =  ReturnType<typeof setCurrentPage>
+export type setUsersTotalCountACType =  ReturnType<typeof setUsersTotalCount>
+export type settogleIsFetchingACType =  ReturnType<typeof togleIsFetching>
+export type setUserProfileACType =  ReturnType<typeof setUserProfileAC>
+export type setUserDataACType =  ReturnType<typeof setUserDataAC>
+export type followingInProgressACType =  ReturnType<typeof followingInProgressAC>
 
 export type ActionTypes =
     AddPostActionType
@@ -72,6 +87,13 @@ export type ActionTypes =
 |followACType
 |unfollowACType
 |setUserACType
+|setCurrentPageACType
+|setUsersTotalCountACType
+|settogleIsFetchingACType
+|setUserProfileACType
+|setUserDataACType
+|followingInProgressACType
+
 
 export const Store: StoreType = {
     _state: {
@@ -83,6 +105,7 @@ export const Store: StoreType = {
                 {id: '1', message: "Hi Yo", likeCount: 25},
                 {id: '1', message: "Yo, how are you", likeCount: 11},
             ],
+            profile:null
             /* newPostText:[
                  {message: 'it-kamasutra'}
              ]*/

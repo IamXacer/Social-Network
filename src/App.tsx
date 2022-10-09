@@ -3,16 +3,15 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {NavBar} from './components/Navbar/NavBar';
 import {Profile} from './components/Profile/Profile';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
-/*import {DialogsType, MessageType, PostDataType} from "./redux/state";*/
+
 import {SuperPostDialigContainer} from './components/Dialogs/PostDialogsContainer';
 import {UsersContainer} from "./components/Users/UsersContainer";
-import {Users} from "./components/Users/Users";
-/*import {PostDialogsContainer} from "./components/Dialogs/PostDialogsContainer";*/
-/*import { DialogsType, MessageType,  PostDataType} from "./index";*/
-/*import {PostDataType} from "./index";*/
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainet";
+
 
 
 export type AppType = {
@@ -31,18 +30,24 @@ const App: React.FC<AppType> = (props) => {
     return (
 
         <div className="app-wrapper">
-            <Header />
+            <HeaderContainer />
 
             <NavBar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path='/profile'
-                           element={<Profile /*store={props.store} *//>}/>
-                    <Route path='/dialogs'
+                    <Route path={'/'} element={<Navigate to={'/profile'}/>}/>
+                    <Route path={'/profile'}>
+                        <Route index element={<ProfileContainer /*store={props.store} *//>}/>
+                        <Route path=':userId'
+                               element={<ProfileContainer /*store={props.store} *//>}/>
+                    </Route>
+
+                    <Route path='/dialsaaogs'
                            element={<SuperPostDialigContainer   />}
                     />
                     <Route path='/users'
-                           element={<UsersContainer/>}/>
+                           element={<UsersContainer  />}
+                    />
                     <Route path='/settings'
                            element={<Settings/>}/>
                     <Route path='/news'
@@ -55,3 +60,17 @@ const App: React.FC<AppType> = (props) => {
 }
 
 export default App;
+
+/*
+
+function hello =()=>{
+    alert('hello')
+}
+
+<script>
+    function removeWhitespaces(string) {
+    string.split(' ').filter(s => s !== '').join('_')
+}
+
+    console.log(removeWhitespaces('you are JS developer'))
+</script>*/

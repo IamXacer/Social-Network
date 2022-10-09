@@ -59,7 +59,7 @@ let initialState ={
         case "SEND-MESSAGE":
             let body = state.newMessagBody
             return  {...state, newMessagBody: '',
-                message: [...state.message, {id: '4', message: body}]
+                message: [{id: '4', message: body},...state.message ]
             }
 
         default :return state

@@ -3,6 +3,6 @@ import classes from './Dialogs.module.css'
 
 export const News = () => {
   return (
-      <div>News</div>
+      <div>News will be here</div>
   )
 }

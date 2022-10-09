@@ -14,7 +14,7 @@ import {SuperMyPostsContainer} from "./My Posts/MyPostContainer";
         likeCount:string
 }*/
 export type ProfileType= {
-   /* store:StoreType*/
+    profile:null
 
 }
 export const Profile = (props:ProfileType) => {
@@ -23,7 +23,7 @@ export const Profile = (props:ProfileType) => {
 
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <SuperMyPostsContainer />
 
         </div>

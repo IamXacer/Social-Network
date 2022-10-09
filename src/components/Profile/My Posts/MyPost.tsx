@@ -48,8 +48,7 @@ export const MyPosts = (props: MyPostType) => {
             <div>
                 <div>
               <span>  <textarea
-                  /*ref={newpostElement}*/
-                  onChange={updateNewPostText}
+                                   onChange={updateNewPostText}
                   value={props.newPostText}/></span>
                 </div>
                 <div>
