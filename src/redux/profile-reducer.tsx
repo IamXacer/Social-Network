@@ -1,5 +1,9 @@
 import {ActionTypes, PostDataType} from "./state";
-import {ChangeEvent} from "react";
+import React, {ChangeEvent} from "react";
+import {Dispatch} from "redux";
+import axios from "axios";
+import { useParams} from "react-router-dom";
+import {userAPI} from "../Api/api";
 
 let initialState = {
     newPostText: '',
@@ -29,6 +33,7 @@ export const ProfileReducer =
         default :return state
     }
 }
+
 export const addPostActionCreator = () => {
     return {
         type: 'ADD-POST'
@@ -39,6 +44,14 @@ export const setUserProfileAC = (profile:null) => {
         type: 'SET-USER-PROFILE',profile
     } as const
 }
+export const getUserProfileThunk = (userId:string) =>(dispatch:Dispatch)=> {
+    userAPI.GetProfile(userId).then(response => {
+        dispatch(setUserProfileAC(response.data))
+    })
+}
+
 export const updateNewPostTextAC = (newText:string) => {
     return {type: "UPDATE-NEW-POST-TEXT", newText:newText } as const
 }
+
+

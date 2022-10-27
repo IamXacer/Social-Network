@@ -1,28 +1,37 @@
 import React from "react";
 import {Header} from "./Header";
-import axios from "axios";
 import { connect } from "react-redux";
-import {authReducer, InitialStateType, setUserDataAC} from "../../redux/auth-reducer";
+import { InitialStateType, setUserDataAC} from "../../redux/auth-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
-import {LoginMe} from "../../Api/api";
+import {LoginAPI, } from "../../Api/api";
 
 type MapStatePropsType = {
-/*    userId: any,
-    email:any*/
-    login:any
+
+    login:any,
     isAuth:boolean
+
 }
-export type mapStateToPropsType = InitialStateType
-export type HeaderPropsType = mapStateToPropsType & MapStatePropsType
+type MapDispatchPropsType ={
+    HeaderThunk:(userId: null,
+                 email:null,
+                 login:any,
+                 isAuth:boolean)=>void
+}
+
+/*export type mapStateToPropsType = InitialStateType*/
+export type HeaderPropsType = MapDispatchPropsType & MapStatePropsType
+
 class  HeaderContainer extends React.Component<any, HeaderPropsType>{
     componentDidMount() {
-        LoginMe().then(data => {
-                debugger
-                             if(data.resultCode === 0){
-                 let {id,login,email} = data.data
+
+        /*this.props.HeaderThunk()*/
+    /*    LoginAPI.me().then(response => {
+                 if(response.data.resultCode === 0){
+                 let {id,login,email} =response.data.data
                  this.props.setUserDataAC(id,email,login)
+
              }
-        })
+        })*/
     }
 
     render() {
@@ -35,4 +44,4 @@ class  HeaderContainer extends React.Component<any, HeaderPropsType>{
         login:state.auth.login,
 
     })
-    export default connect (mapStateToProps,{setUserDataAC}) (HeaderContainer)
+    export default connect(mapStateToProps,{setUserDataAC}) (HeaderContainer)

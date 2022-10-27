@@ -3,13 +3,12 @@ import {addPostActionCreator, ProfileReducer, setUserProfileAC, updateNewPostTex
 import {DialogsReducer, sendNewMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 import {
-    follow, followingInProgressAC,
+    acceptFollow, acceptUnfollow,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount,
+    setUsersTotalCount, toglefollowingInProgress,
     togleIsFetching,
-    unfollow
-} from "./user-reducer";
+    } from "./user-reducer";
 import {setUserDataAC} from "./auth-reducer";
 
 export type DialogsType = {
@@ -69,15 +68,15 @@ export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdatePostActionType =  ReturnType<typeof updateNewPostTextAC>
 export type updateNewMessageBodyACType =  ReturnType<typeof updateNewMessageBodyAC>
 export type sendNewMessageACType =  ReturnType<typeof sendNewMessageAC>
-export type followACType =  ReturnType<typeof follow>
-export type unfollowACType =  ReturnType<typeof unfollow>
+export type followACType =  ReturnType<typeof acceptFollow>
+export type unfollowACType =  ReturnType<typeof acceptUnfollow>
 export type setUserACType =  ReturnType<typeof setUsers>
 export type setCurrentPageACType =  ReturnType<typeof setCurrentPage>
 export type setUsersTotalCountACType =  ReturnType<typeof setUsersTotalCount>
 export type settogleIsFetchingACType =  ReturnType<typeof togleIsFetching>
 export type setUserProfileACType =  ReturnType<typeof setUserProfileAC>
 export type setUserDataACType =  ReturnType<typeof setUserDataAC>
-export type followingInProgressACType =  ReturnType<typeof followingInProgressAC>
+export type toglefollowingInProgressType =  ReturnType<typeof toglefollowingInProgress>
 
 export type ActionTypes =
     AddPostActionType
@@ -92,7 +91,7 @@ export type ActionTypes =
 |settogleIsFetchingACType
 |setUserProfileACType
 |setUserDataACType
-|followingInProgressACType
+|toglefollowingInProgressType
 
 
 export const Store: StoreType = {
@@ -101,9 +100,9 @@ export const Store: StoreType = {
             newPostText: '',
             postData: [
                 {id: '1', message: "Hi, how are you", likeCount: 15},
-                {id: '1', message: "It's my first post", likeCount: 35},
-                {id: '1', message: "Hi Yo", likeCount: 25},
-                {id: '1', message: "Yo, how are you", likeCount: 11},
+                {id: '2', message: "It's my first post", likeCount: 35},
+                {id: '3', message: "Hi Yo", likeCount: 25},
+                {id: '4', message: "Yo, how are you", likeCount: 11},
             ],
             profile:null
             /* newPostText:[

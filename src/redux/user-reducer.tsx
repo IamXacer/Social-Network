@@ -1,4 +1,6 @@
 import {ActionTypes} from "./state";
+import { userAPI} from "../Api/api";
+import {Dispatch} from "redux";
 
 export type UsersType = {
     id: string,
@@ -25,7 +27,7 @@ export type InitialStateType = {
     currentPage: number;
       users: Array<UsersType>,
     isFetching:boolean,
-    followingInProgress:boolean
+    followingInProgress:string[],
 }
 
 const initialState: InitialStateType = {
@@ -34,7 +36,8 @@ const initialState: InitialStateType = {
     totalUsersCount:0,
     currentPage:1,
     isFetching:true,
-    followingInProgress: false
+    followingInProgress:[],
+
 }
 
 export const UserReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -61,21 +64,26 @@ export const UserReducer = (state: InitialStateType = initialState, action: Acti
 
         case 'TOGGLE-IS-FETCHING':
             return {...state,isFetching:action.isFetching}
-        case 'FOLOWING_PROGRESS':
-            return {...state,followingInProgress:action.followingInProgress}
+        case 'FOLOWING_PROGRESS':{
+            return {...state,
+                followingInProgress:action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id=>id != action.userId)
 
+            }
+        }
 
 
         default :
             return state
     }
 }
-export const follow = (userId: string) => {
+export const acceptFollow = (userId: string) => {
     return {
         type: 'FOLLOW', userId
     } as const
 }
-export const unfollow = (userId: string) => {
+export const acceptUnfollow = (userId: string) => {
     return {type: 'UNFOLLOW', userId} as const
 }
 export const setUsers = (users: Array<UsersType>) => {
@@ -91,6 +99,39 @@ export const setUsersTotalCount = (totalCount:number) => {
 export const togleIsFetching = (isFetching:boolean) => {
   return{type:'TOGGLE-IS-FETCHING',isFetching} as const
 }
-export const followingInProgressAC = (followingInProgress:boolean) => {
-    return{type:'FOLOWING_PROGRESS',followingInProgress} as const
+export const toglefollowingInProgress = (isFetching:boolean,userId:string) => {
+    return{type:'FOLOWING_PROGRESS',isFetching,userId} as const
+}
+
+export const getUsers = (currentPage:number,pageSize:number) => {
+    return (dispatch:Dispatch) => {
+        dispatch(togleIsFetching(true))
+        userAPI.GetUsers(currentPage, pageSize).then(data => {
+            dispatch(togleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setUsersTotalCount(data.totalCount))
+        })
+    }
+}
+ export const follow = (userId:string) => {
+
+    return (dispatch:Dispatch) => {
+        dispatch(toglefollowingInProgress(true,userId))
+        userAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0)
+                dispatch(acceptFollow(userId))
+           dispatch( toglefollowingInProgress(true,userId))
+        })
+    }
+}
+export const unfollow = (userId:string) => {
+
+    return (dispatch:Dispatch) => {
+        dispatch(toglefollowingInProgress(true,userId))
+        userAPI.unfollow(userId).then(response => {
+            if (response.data.resultCode === 0)
+                dispatch(acceptUnfollow(userId))
+            dispatch( toglefollowingInProgress(true,userId))
+        })
+    }
 }
