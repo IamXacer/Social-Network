@@ -1,15 +1,19 @@
 import React, {ChangeEvent} from "react";
 import classes from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 import { DialogItems } from "./DialgItem/DialogItem";
 import { Message } from "./Message/Message";
 import { StoreType } from "../../redux/redux-store";
 import {ActionTypes, dialogsPageType, DialogsType, MessageType} from "../../redux/state";
+import { Navigate } from "react-router-dom";
+
+
+
 
 type PostDialogType={
     sendMessage:()=>void
     updateNewMessageBody:(body:any)=>void
     dialogsPage: dialogsPageType
+    isAuth:boolean
 
 }
 
@@ -37,6 +41,7 @@ let onSendMessageClick = () =>{
         /*props.dispatch(updateNewMessageBodyAC(body))*/
     }
 
+if(!props.isAuth ) return <Navigate  to={'/login'}/>
 
     return (
       <div className={classes.dialogs}>

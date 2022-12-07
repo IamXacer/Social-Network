@@ -11,6 +11,8 @@ type PostDialogType={
 }
 type mapStateToPropsType = {
     dialogsPage:dialogsPageType
+    isAuth:boolean
+
 }
 /*
 export const PostDialogsContainer = (props:PostDialogType) => {
@@ -34,7 +36,8 @@ let onSendMessageClick = () =>{
 
 let mapStateToProps = (state:AppRootStateType):mapStateToPropsType=>{
     return {
-        dialogsPage:state.dialogsPage
+        dialogsPage:state.dialogsPage,
+        isAuth:state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch:any) =>{

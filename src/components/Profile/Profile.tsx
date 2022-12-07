@@ -5,6 +5,8 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 /*import {MyPostsContainer} from "./My Posts/MyPostContainer";*/
 import { StoreType } from "../../redux/redux-store";
 import {SuperMyPostsContainer} from "./My Posts/MyPostContainer";
+
+
 /*import {PostDataType} from "../../index";*/
 /*import {PostDataType} from "../../index"*/
 
@@ -15,6 +17,7 @@ import {SuperMyPostsContainer} from "./My Posts/MyPostContainer";
 }*/
 export type ProfileType= {
     profile:null
+
 
 }
 export const Profile = (props:ProfileType) => {

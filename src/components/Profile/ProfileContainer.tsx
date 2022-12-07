@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {Profile} from "./Profile";
 import { getUserProfileThunk, updateNewPostTextAC} from "../../redux/profile-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
-import {useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {RouteComponentProps} from "@reach/router";
-import { userAPI} from "../../Api/api";
+
 
 
 type PathParamsType = {
@@ -15,6 +15,8 @@ type PathParamsType = {
 }
 type MapStatePropsType = {
     profile: any
+    isAuth:boolean
+
 }
 type MapDispatchPropsTpe = {
     setUserProfileAC: (profile: any) => void
@@ -45,17 +47,17 @@ class ProfileContainer extends React.Component<any, PropsType> {
     }
 
     render() {
+        if( !this.props.isAuth ) return <Navigate  to={'/profile'}/>
         return (
             <Profile {...this.props}
-
                      profile={this.props.profile}/>
         )
     }
 }
 
 let mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({
-
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth:state.auth.isAuth
 })
 let withUrlDaContainerComponentwith = withRouter(ProfileContainer)
 
