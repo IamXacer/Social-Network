@@ -11,6 +11,7 @@ import {SuperPostDialigContainer} from './components/Dialogs/PostDialogsContaine
 import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainet";
+import {Login} from "./components/common/Login/Login";
 
 
 
@@ -47,6 +48,9 @@ const App: React.FC<AppType> = (props) => {
                     />
                     <Route path='/users'
                            element={<UsersContainer  />}
+                    />
+                    <Route path='/login'
+                           element={<Login/>}
                     />
                     <Route path='/settings'
                            element={<Settings/>}/>
