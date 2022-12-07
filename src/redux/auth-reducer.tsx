@@ -57,9 +57,9 @@ export const setUserDataAC = (userId: null,email:null,login:null) => {
 }
 
 
-/*
 
-export const HeaderThunk = (userId: null, email:null, login:null) => {(dispatch:Dispatch) => {
+
+export const HeaderThunk = (userId: null, email:null, login:null) => (dispatch:Dispatch) => {
     LoginAPI.me().then(response => {
         if(response.data.resultCode === 0){
             let {id,login,email} =response.data.data
@@ -68,5 +68,5 @@ export const HeaderThunk = (userId: null, email:null, login:null) => {(dispatch:
         }
     })
     }
-}
-*/
+
+
