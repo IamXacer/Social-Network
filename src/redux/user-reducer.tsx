@@ -103,8 +103,7 @@ export const toglefollowingInProgress = (isFetching:boolean,userId:string) => {
     return{type:'FOLOWING_PROGRESS',isFetching,userId} as const
 }
 
-export const getUsers = (currentPage:number,pageSize:number) => {
-    return (dispatch:Dispatch) => {
+export const getUsersTC = (currentPage:number, pageSize:number) => {return (dispatch:Dispatch) => {
         dispatch(togleIsFetching(true))
         userAPI.GetUsers(currentPage, pageSize).then(data => {
             dispatch(togleIsFetching(false))

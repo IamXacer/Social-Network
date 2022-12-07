@@ -27,10 +27,11 @@ export const Users = (props: UserType) => {
         {
             props.users.map(u => <div key={u.id}>
 
+
                 <div>
 
                     <img
-                        // @ts-ignore
+
                         src ={u.photos.small !=null ? u.photos.small : userPhoto}
                          className={styles.usersPhoto}/>
                 </div>
