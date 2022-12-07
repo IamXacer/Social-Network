@@ -28,6 +28,7 @@ export let Users1 = (props:UserType) => {
         pages.push(i)
 
 
+
     return <div>
         <div>
             {pages.map(pages => {
@@ -36,12 +37,10 @@ export let Users1 = (props:UserType) => {
                 >{pages}</span>
             })}</div>
         {
-
             props.users.map((u) => <div key={u.id}>
                 <div>
           <NavLink to={'/profile/' + u.id} >
-              <img
-                  src={u.photos.small ? u.photos.small : userPhoto}
+              <img src={u.photos.small ? u.photos.small : userPhoto}
                         className={styles.usersPhoto}/></NavLink>
                 </div>
                 <div>
